@@ -12,13 +12,14 @@ export async function POST(request: NextRequest) {
     const { email, password } = reqBody;
 
     // Check if user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return NextResponse.json(
-        { error: "User doesn't exist" },
-        { status: 400 }
-      );
-    }
+    const user = await User.findOne({ username:email });
+    // if (!user) {
+    //   return NextResponse.json(
+    //     { error: "User doesn't exist" },
+    //     { status: 400 }
+    //   );
+    // }
+ console.log("user is", email, password, user)
 
     // check if password is correct
     const validPassword = await bcryptjs.compare(password, user.password);
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
     const tokenData = {
       id: user._id,
       username: user.username,
-      email: user.email,
+      // email: user.email,
     };
     //create token
     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {

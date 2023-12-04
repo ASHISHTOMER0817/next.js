@@ -23,6 +23,6 @@ forgotPasswordTokenExpiry: Date,
 verifyToken: String,
 verifyTokenExpiry: Date,
 })
-const User = mongoose.models.user || mongoose.model("Users", userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 
 export default User;
